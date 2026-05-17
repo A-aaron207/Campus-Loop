@@ -1,36 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CampusLoop V1 MVP
+
+Hyperlocal student marketplace for schools and colleges. Built for speed, trust, and a modern student experience.
+
+## Tech Stack
+
+- **Frontend:** Next.js 14 (App Router)
+- **Styling:** TailwindCSS + Framer Motion
+- **Database:** Supabase PostgreSQL
+- **Auth:** Supabase Auth (SSR)
+- **Realtime:** Supabase Realtime (In-app Chat)
+- **Storage:** Supabase Storage (Listing Images)
+
+## Features
+
+- **Auth System:** Email/Password signup with automatic profile creation.
+- **Marketplace Feed:** Search, filter by category, and explore latest listings.
+- **Create Listing:** Multi-image upload, price setting, category selection, and SEO-friendly slugs.
+- **Listing Details:** High-impact gallery, seller verification status, and view tracking.
+- **In-App Realtime Chat:** Secure messaging between buyers and sellers.
+- **Saved Items:** Bookmark listings for later.
+- **Responsive Design:** Mobile-first architecture with glassmorphism UI.
 
 ## Getting Started
 
-First, run the development server:
+### 1. Prerequisites
+
+- Node.js 18+
+- Supabase Account
+
+### 2. Installation
+
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd campusloop
+
+# Install dependencies
+npm install
+```
+
+### 3. Environment Variables
+
+Create a `.env.local` file in the root:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+```
+
+### 4. Database Setup
+
+Run the SQL in `supabase/schema.sql` inside your Supabase SQL Editor.
+
+### 5. Storage Setup
+
+Create a public bucket named `listings` in Supabase Storage. Set up the following policy for public access:
+
+- **Policy name:** `Public Access`
+- **Allowed operations:** `SELECT`
+- **Target roles:** `public`
+
+### 6. Run the Project
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Engineering Decisions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Server Actions:** Used for all data mutations to ensure deep integration with Next.js and type safety.
+- **Realtime Sync:** Leverages Supabase Realtime for the chat system, ensuring messages appear instantly without refresh.
+- **Image Handling:** Uses a separate `listing_images` table for better scalability and faster sorting.
+- **SEO Routing:** Listings use unique slugs (e.g., `/listings/calculus-book-abc12`) instead of UUIDs.
+- **Trust Layer:** Built-in verification badges and campus/school metadata to create a secure student environment.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
