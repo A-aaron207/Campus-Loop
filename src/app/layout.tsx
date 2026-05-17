@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   description: "Buy, sell, and trade within your campus community.",
 };
 
+// CampusLoop Layout - V1
 export default function RootLayout({
   children,
 }: Readonly<{
